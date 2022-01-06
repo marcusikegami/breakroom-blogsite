@@ -16,11 +16,12 @@
       <div class="container flex-row justify-space-between align-center py-3">
         <h1 class="page-title text-secondary bg-dark py-2 px-3">BreakRoom</h1>
         <nav class="flex-row">
-          <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="">Home</a>
-          <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="">Profile</a>
-          <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="">Login</a>
-          {{#if loggedIn }}
-          <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="">Logout</a>
+          <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="/">Home</a>
+           {{#if loggedIn }}
+          <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="/profile">Profile</a>
+          <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" id="logout">Logout</a>
+          {{else}}
+          <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" href="/login">Login</a>
           {{/if}}
         </nav>
       </div>
@@ -31,5 +32,6 @@
     <footer class="container text-center py-3">
       <a href="https://github.com/marcusikegami"><h3 class="text-dark">&copy; 2021 by Marcus H. Ikegami</h3></a>
     </footer>
+    <script src="/javascript/logout.js"></script>
   </body>
   </html>     

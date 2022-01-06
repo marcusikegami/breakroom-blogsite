@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const sequelize = require('../../config/connection');
 const { User } = require('../../models');
+const bcrypt = require('bcrypt');
 
 // GET /api/users
 router.get('/', (req, res) => {
@@ -28,16 +29,33 @@ router.get('/:id', (req, res) => {
 
 // POST /api/users
 router.post('/', (req, res) => {
-    User.create({
-        username: req.body.username,
-        email: req.body.email,
-        password: req.body.password
-    })
-    .then(userData => res.json(userData))
-    .catch(err => {            console.log(err);
-        res.status(500).json(err);
+
+       
+    bcrypt.hash(req.body.password, 10, function(err, hash) {
+            User.create({
+            username: req.body.username,
+            email: req.body.email,
+            password: hash
+        })
+        .then(userData => res.json(userData))
+        .catch(err => {            console.log(err);
+            res.status(500).json(err);
+        });
+        
     });
+
+    
 });
+
+router.get('/login', (req, res) => {
+
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+      }
+
+    res.render('login');
+})
 
 router.post('/login', (req, res) => {
     User.findOne({
@@ -51,6 +69,7 @@ router.post('/login', (req, res) => {
             res.status(400).json({ message: 'No user with that email address!' });
             return;
         }
+        
         const validPassword = userData.checkPassword(req.body.password);
         if(!validPassword) {
             console.log('Invalid password.');
@@ -64,11 +83,25 @@ router.post('/login', (req, res) => {
             req.session.email = userData.email;
             req.session.loggedIn = true;
 
-            res.json({ user: userData, message: 'You are now logged in!' });
-            console.log('Login success');
+            res.render('homepage', {loggedIn: true});
+            
         })
     })
     
+});
+
+router.post('/logout', (req, res) => {
+
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+            res.status(204).end();
+            
+        });
+    }
+    else {
+        res.status(404).end()
+    }
+
 });
     
 // PUT /api/users/1
