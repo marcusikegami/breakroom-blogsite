@@ -31,11 +31,15 @@ router.get('/post/:id', (req, res) => {
             id: req.params.id
         },
         include: {
+            model: User,
+            attributes: ['id', 'username' ],
+        },
+        include: {
             model: Comment,
             order: [['created_at', 'ASC']],
             include: {
                 model: User,
-                attributes: ['username']
+                attributes: ['username', 'id']
             }
         }
     })
@@ -44,10 +48,18 @@ router.get('/post/:id', (req, res) => {
                 res.status(404).json({ message: 'No post found with this id' });
                 return;
               }
-
+              console.log(postData);
+            
             const post = postData.get({ plain: true });
-            console.log(post);
-            res.render('single-post', {post, loggedIn: req.session.loggedIn});
+            
+            const isPostOwner = function() {
+                if (post.user_id === req.session.user_id) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            res.render('single-post', {post, loggedIn: req.session.loggedIn, author: isPostOwner});
         })
         .catch(err => {
             console.log(err);

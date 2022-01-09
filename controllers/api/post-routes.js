@@ -39,7 +39,13 @@ router.post('/', withAuth, (req, res) => {
 
     Post.create({
         title: req.body.title,
-        user_id: req.session.user_id
+        description: req.body.description,
+        user_id: req.session.user_id,
+        // include: {
+        //     model: User,
+        //     attributes: ['id', 'username' ],
+        // }
+
     })
         .then(postData => {
             res.json(postData);
@@ -55,7 +61,8 @@ router.put('/:id', withAuth, (req, res) => {
 
     Post.update(
         {
-            title: req.body.title
+            title: req.body.title,
+            description: req.body.description,
         },
         {
             where: {
