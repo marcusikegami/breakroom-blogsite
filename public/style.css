@@ -1030,3 +1030,7 @@ nav a:hover {
     flex: 0 0 100%;
   }
 }
+
+#comment-submit:hover {
+  color: var(--primary);
+}

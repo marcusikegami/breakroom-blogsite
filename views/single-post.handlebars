@@ -1,16 +1,18 @@
 {{> post-info post}}
 
 {{#if loggedIn }}
-<form class="comment-form">
-  <div>
-    <textarea name="comment-body"></textarea>
+<form class="comment-form bg-dark p-2 text-light">
+  <div class="col-8">
+    <textarea name="comment-body" class="comment-ta"></textarea>
   </div>
 
   <div>
-    <button type="submit">add comment</button>
-    <button type="button" class="upvote-btn">upvote</button>
+    <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" id="comment-submit">add comment</a>
   </div>
 </form>
 {{/if}}
 
 {{> comments post.comments}}
+
+<script src="/javascript/comment.js"></script>
+<script src="/javascript/logout.js"></script>
