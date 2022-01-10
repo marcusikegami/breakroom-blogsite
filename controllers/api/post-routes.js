@@ -8,33 +8,6 @@ router.get('/', (req, res) => {
         .then(posts => {res.json(posts)});
 });
 
-router.get('/edit/:id', (req, res) => {
-    Post.findOne({
-        where: {
-            id: req.params.id
-        },
-        include: {
-            model: Comment,
-            order: [['created_at', 'ASC']],
-            include: {
-                model: User,
-                attributes: ['username']
-            }
-        }
-    })
-    .then(postData => {
-        if (!postData) {
-            res.status(404).json({ message: 'No post found with this id' });
-            return;
-          }
-        res.json(postData);
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json(err);
-    });
-})
-
 router.get('/:id', (req, res) => {
     Post.findOne({
         where: {
