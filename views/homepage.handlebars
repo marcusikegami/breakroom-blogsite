@@ -1,5 +1,10 @@
 <section class="my-3" id="portfolio">
       <h2 class="text-dark bg-primary p-2 display-inline-block">Recent Posts</h2>
+      {{#if loggedIn}}
+      <div class="flex-row justify-space-between">
+      <a href="/new" class="btn">Make a New Post</a>
+      </div>
+      {{/if}}
       <div class="flex-row justify-space-between">
         {{#each posts}}
     

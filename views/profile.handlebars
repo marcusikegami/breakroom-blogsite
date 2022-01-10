@@ -1,6 +1,7 @@
 <section class="my-3" id="portfolio">
       <h2 class="text-dark bg-primary p-2 display-inline-block">Recent Posts</h2>
       <div class="flex-row justify-space-between">
+          <a href="/new" class="btn">Make a New Post</a>
         {{#each posts}}
     
         <a href="/post/{{id}}">
@@ -10,10 +11,11 @@
               {{ createdAt }}
             </h5>
             <p>{{ user.username }}</p>
-            <a href="https://github.com/marcusikegami/README-generator" class="btn">Comments</a>
+            <a class="btn">Comments</a>
           </div>
         </a>
      
   {{/each}} 
   </div>
 </section>
+<script src="/javascript/create-post.js">

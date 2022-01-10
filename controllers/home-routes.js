@@ -25,6 +25,14 @@ router.get('/', (req, res) => {
     
 });
 
+router.get('/new', (req,res) => {
+    if (!req.session.loggedIn) {
+        res.redirect('/login');
+        return;
+    }
+    res.render('create-post');
+})
+
 router.get('/edit/:id', (req, res) => {
     Post.findOne({
         where: {
