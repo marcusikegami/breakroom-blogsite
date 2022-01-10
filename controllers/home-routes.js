@@ -25,6 +25,47 @@ router.get('/', (req, res) => {
     
 });
 
+router.get('/edit/:id', (req, res) => {
+    Post.findOne({
+        where: {
+            id: req.params.id
+        },
+        include: {
+            model: Comment,
+            order: [['created_at', 'ASC']],
+            include: {
+                model: User,
+                attributes: ['username']
+            }
+        }
+    })
+    .then(postData => {
+        if (!postData) {
+            res.status(404).json({ message: 'No post found with this id' });
+            return;
+          }
+          console.log(postData);
+        
+        const post = postData.get({ plain: true });
+        
+        const isPostOwner = function() {
+            if (post.user_id === req.session.user_id) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        if(isPostOwner) {
+            res.render('edit-post', {post, loggedIn: req.session.loggedIn});
+        }
+        
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    });
+})
+
 router.get('/post/:id', (req, res) => {
     Post.findOne({
         where: {

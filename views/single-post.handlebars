@@ -6,8 +6,7 @@
   <p>{{ post.user.username }}</p>
   <p>{{ post.createdAt }}</p>
 {{#if author}}
-  <a href="/posts/edit/{{id}}" class="btn">Edit</a>
-  <a href="" class="btn">Delete</a>
+  <a href="/edit/{{post.id}}" class="btn">Edit</a>
 {{/if}}
 </div>
 

@@ -1,10 +1,38 @@
+
 <div class="col-12 mb-2 bg-dark text-light p-3">
-  <h3 class="portfolio-item-title text-light">Title</h3>
-  <textarea id="title-area"></textarea>
-  <h5 class="portfolio-languages">
-  {{ title }}
-  </h5>
-  <p>{{ createdAt }}</p>
-  <a href="/posts/edit/{{id}}" class="btn">Edit</a>
-  <a href="https://github.com/marcusikegami/README-generator" class="btn">Delete</a>
-</div>
+  <a href="/profile" class="btn">&larr; Back to profile</a>
+  <div class="mb-2">
+  <h3 class="portfolio-item-title text-light">Edit Post</h3>
+  <form class="edit-post-form">
+    <div>
+      <input name="post-title" type="text" value="{{post.title}}" />
+    </div>
+    <div>
+      <input name="post-description" type="text" value="{{post.description}}" />
+    </div>
+    </div>
+    <a  id="save-btn" class="btn">Save</a>
+    <a class="btn" id="delete-btn">Delete</a>
+  </form>
+  
+</div >
+
+{{#if loggedIn }}
+<form class="comment-form bg-dark p-2 text-light">
+  <div class="col-8">
+    <textarea name="comment-body" class="comment-ta"></textarea>
+  </div>
+
+  <div>
+    <a class="ml-2 my-1 px-2 py-1 bg-secondary text-dark" id="comment-submit">add comment</a>
+  </div>
+</form>
+{{/if}}
+
+{{> comments post.comments}}
+
+<script src="/javascript/comment.js"></script>
+<script src="/javascript/logout.js"></script>
+<script src="/javascript/delete-post.js"></script>
+<script src="/javascript/edit-post.js"></script>
+
