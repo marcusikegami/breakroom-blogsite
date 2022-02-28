@@ -12,6 +12,12 @@
 
 BreakRoom is a blogsite web-application that allows users to: Create an account, Make/Edit/Delete posts, comment on posts, view their post profile, and login/logout from the site. Its structured using RESTful API guidelines and makes use of the browsers fetch() API. It was designed using handlebars.js as the templating engine, sequelize for database manipulation, bcrypt to hash passwords, and heroku to host the app.
 
+## Live Application Link: 
+[Live Link](https://arcane-spire-94418.herokuapp.com/)
+
+
+![Screenshot of deep thoughts](https://github.com/marcusikegami/breakroom-blogsite/blob/main/screenshot.png?raw=true)
+
 ## Installation
 
 Clone the repo into the working directory. Run the command "npm i" in your Git CLI to install node_omdules. Create a .env file in the root directory and add lines "DB_NAME=", "DB_USER=", and "DB_PW=" with values respective to your MYSQL login and DB information. Open an instance of your MYSQL CLI and run the command "source db/schema.sql" to create the DB. Run the command "npm start" and if you have completed the previous steps successfully, the app will load and create the models and routes.
