@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
         }
     })
     .then(postData => {
-        const posts = postData.map(posts => posts.get({ plain: true }));
+        const posts = postData.reverse().map(posts => posts.get({ plain: true }));
         res.render('profile', {posts, loggedIn: req.session.loggedIn});
     })
     .catch(err => {

@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
             return;
           }
 
-        const posts = postData.map(posts => posts.get({ plain: true }));
+        const posts = postData.reverse().map(posts => posts.get({ plain: true }));
         res.render('homepage', {posts, loggedIn: req.session.loggedIn});
     })
     .catch(err => {
@@ -28,9 +28,10 @@ router.get('/', (req, res) => {
 router.get('/new', (req,res) => {
     if (!req.session.loggedIn) {
         res.redirect('/login');
+        alert('You need to be logged in to access this page.');
         return;
     }
-    res.render('create-post');
+    res.render('create-post', {loggedIn: req.session.loggedIn});
 })
 
 router.get('/edit/:id', (req, res) => {
