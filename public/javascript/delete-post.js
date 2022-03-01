@@ -13,6 +13,7 @@ async function deleteFormHandler(event) {
 
     if(response.ok) {
         document.location.replace('/profile');
+        response.json();
     } else {
         alert(response.statusText);
     }
